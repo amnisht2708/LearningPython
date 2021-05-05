@@ -1,0 +1,23 @@
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+import statsmodels.api as sm 
+sns.set()
+data = pd.read_csv("real_estate_price_size.csv")
+data
+data.describe()
+x = data["size"]
+y = data["price"]
+plt.scatter(x,y)
+plt.xlabel("SIZE", fontsize = 20)
+plt.ylabel("PRICE", fontsize = 20)
+x1 = sm.add_constant(x)
+result = sm.OLS(y,x1).fit()
+result.summary()
+plt.scatter(x,y)
+yhat = 1.019e+05 + 223.1787*x
+fig = plt.plot(x,yhat, lw=4, c = 'orange', label = 'regression line')
+plt.xlabel("SAT",fontsize = 20)
+plt.ylabel("GPA",fontsize = 20)
+plt.show()
