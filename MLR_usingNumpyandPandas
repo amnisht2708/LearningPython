@@ -13,3 +13,20 @@ result.summary()
 x = sm.add_constant(x1)
 result = sm.OLS(y,x).fit()
 result.summary()
+# Now this uses a dummy variable and we use a categorical variable
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+import seaborn as sns
+sns.set()
+data_1 = pd.read_csv("real_estate_price_size_year_view.csv")
+data_1
+data = data_1.copy()
+data['view'] = data['view'].map({'No sea view':0,'Sea view':1})
+data
+x = data[['size','year','view']]
+y = data['price']
+x1 = sm.add_constant(x)
+result = sm.OLS(y,x1).fit()
+result.summary()
